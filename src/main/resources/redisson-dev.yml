@@ -1,0 +1,3 @@
+singleServerConfig:
+  password: #REDIS PASSWORD
+  address: #REDIS IP

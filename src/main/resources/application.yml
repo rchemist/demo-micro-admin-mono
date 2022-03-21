@@ -1,0 +1,56 @@
+#원래 spring.config.import 의 값들은 모두 각 마이크로서비스에서 SpringCloud ConfigServer 를 통해 전달받는 값이다.
+#하지만 모놀리틱 모드에서는 SpringCloud 를 사용하지 않으므로 각 서비스가 받아 올 Config 정보가 없다.
+#따라서 각 서비스를 구동할 때 필요한 모든 정보를 아래와 같이 import 한다.
+spring:
+  config:
+    on-not-found: ignore
+    import:
+      - classpath:service-properties/micro-common/application.yml
+      - classpath:service-properties/micro-common/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-asset/application.yml
+      - classpath:service-properties/micro-asset/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-cms/application.yml
+      - classpath:service-properties/micro-cms/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-commerce-catalog/application.yml
+      - classpath:service-properties/micro-commerce-catalog/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-commerce-order/application.yml
+      - classpath:service-properties/micro-commerce-order/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-commerce-promotion/application.yml
+      - classpath:service-properties/micro-commerce-promotion/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-customer/application.yml
+      - classpath:service-properties/micro-customer/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-event/application.yml
+      - classpath:service-properties/micro-event/application-${spring.profiles.active:local}.yml
+      - classpath:service-properties/micro-tenant/application.yml
+      - classpath:service-properties/micro-tenant/application-${spring.profiles.active:local}.yml
+      - classpath:application-override.yml
+      - classpath:application-${spring.profiles.active:local}-override.yml
+  datasource:
+    rcm-rdb:
+      front:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url:
+        password:
+        url:
+        username:
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+            redisson:
+              entity-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              query-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+
+

@@ -1,0 +1,4 @@
+platform:
+  config:
+    provider:
+      search: querydsl    #검색엔진을 사용할 것인지(hibernate), 그냥 DB에서 검색할 지(querydsl) 선택한다. querydsl | hibernate 둘 중 하나의 값을 사용할 수 있다.

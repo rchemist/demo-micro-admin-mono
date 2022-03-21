@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    rcm-rdb:
+      tenant:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_tenant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        password: 
+        url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_tenant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        username: 
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+            redisson:
+              entity-adminSecurity:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              query-adminSecurity:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              entity-tenant:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              query-tenant:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+  application:
+    name: "micro-tenant"
+
+server:
+  port: 8280
+https:
+  port: 8281
+platform:
+  config:
+    microservice:
+      tenant: true
+    security:
+      server: true
+    tenant:
+      name: "micro-tenant(from git - local)"
+eureka:
+  instance:
+    intance-id: micro-tenant-instance
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+

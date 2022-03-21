@@ -1,0 +1,186 @@
+spring:
+  cache:
+    type: jcache
+  redis:
+    host: #REDIS_ADDRESS
+    port: 6379
+    password: 
+  data:
+    mongodb:
+      retryWrite: true
+      authSource: admin
+      username: 
+      password: 
+      database: rcm-common
+      auto-index-creation: true
+    elasticsearch:
+      port: 9200
+      host: #ELASTIC_SEARCH_ADDRESS
+      username: 
+      password: 
+  datasource:
+    rcm-rdb:
+      common:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_common?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        password: 
+        url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_common?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        username: 
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+          redisson:
+            entity-asset:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            query-asset:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            entity-translate:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            query-translate:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+    rcm-mongo:    # for override spring.data.mongodb.* values each at services
+      common:
+        connectionString: mongodb+srv://MONGO_CLIENT_ID:MONGO_CLIENT_PASSWORD@MONGODB_ADDRESS/rcm-common?retryWrites=true&w=majority&connecttimeoutms=10000&sockettimeoutms=15000&waitqueuetimeoutms=3000&maxlifetimems=60000&maxlifetimems=120000&heartbeatfrequencyms=20000&ssl=true
+        database: rcm-common
+        username: 
+        password: 
+        retryWrite: true
+        authSource: admin
+    rcm-elastic: # for override spring.data.elasticsearch.* values each at services
+      common:
+        port: 9200
+        host: #ELASTIC_SEARCH_ADDRESS
+        username: 
+        password: 
+  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  jpa:
+    generate-ddl: true
+    hibernate:
+      cache:
+        use_second_level_cache: true
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      format_sql: true
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _HISTORY
+            modified_flag_suffix: _CHANGED
+      hibernate:
+        cache:
+          region:
+            factory_class: org.redisson.hibernate.RedissonRegionFactory # for redisson
+          redisson:   # for redisson
+            config: redisson-dev.yml   # for redisson
+            entity:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            collection:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            naturalid:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            query:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            timestamps:
+              eviction:
+                max_entries: 10000
+              expiration:
+                time_to_live: 600000
+            fallback: true
+
+              # factory_class : io.rchemist.common.cache.jedis.JedisRegionFactory   # for jedis
+              # redis:    # for jedis
+              # standalone:   # for jedis
+            # host: localhost   # for jedis
+            # port: 6379    # for jedis
+
+        search:
+          default:
+            elasticsearch:
+              required_index_status: yellow
+          configuration_property_checking:
+            strategy: ignore    # 설정 정보가 unused 상태인 경우에도 별도의 warning 을 하지 않도록 변경
+          schema_management:
+            strategy: drop-and-create #drop-and-create   # 개발 중일 때만 drop-and-create 를 한다. analyzer 가 변경되면 기존 스키마를 지워야 하기 때문이다.
+          backend:
+            schema_management:
+              minimal_required_status: yellow
+              minimal_required_status_wait_timeout: 100000
+            username: 
+            password: 
+            analysis:
+              configurer: class:io.rchemist.common.search.config.ElasticsearchKoreanAnalyzerConfigurer
+      javax:
+        persistence:
+          validation:
+            mode: none
+  main:
+    allow-bean-definition-overriding: true
+    mvc:
+      static-path-pattern: /resources/**
+  elasticsearch:
+    rest:
+      port: 9200
+      host: #ELASTIC_SEARCH_ADDRESS
+      username: 
+      password: 
+
+thymeleaf:
+  threadLocalCleanup:
+    enabled: true
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force-response: true
+      force-request: true
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG    # 실제 운영 서버에서는 변경
+        orm:
+          jpa:
+            persistenceunit: ERROR    #  WARN o.s.o.j.p.ClassFileTransformerAdapter : Error weaving class [org/springframework/data/util/KotlinReflectionUtils] with transformer of class [org.hibernate.jpa.internal.enhance.EnhancingClassTransformerImpl]
+
+platform:
+  config:
+    security:
+      token:
+        secret: CLIENT_TOKEN_SECRET_FILTER
+        validity: 3600
+    tenant:
+      name: "micro-tenant(from git - common)"

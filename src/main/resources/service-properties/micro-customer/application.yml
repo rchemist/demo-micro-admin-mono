@@ -1,0 +1,88 @@
+spring:
+  datasource:
+    rcm-rdb:
+      customer:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_customer?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        password: 
+        url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_customer?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        username: 
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+            redisson:
+              entity-customer:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+              query-customer:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+              entity-customerAddress:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+              query-customerAddress:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+              entity-customerPhone:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+              query-customerPhone:
+                eviction:
+                  max_entries:
+                    100000
+                expiration:
+                  time_to_live: 86400000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+    rcm-mongo: # for override spring.data.mongodb.* values each at services
+      customer:
+        connectionString: mongodb+srv://MONGO_CLIENT_ID:MONGO_CLIENT_PASSWORD@MONGODB_ADDRESS/rcm-customer?retryWrites=true&w=majority&connecttimeoutms=10000&sockettimeoutms=15000&waitqueuetimeoutms=3000&maxlifetimems=60000&maxlifetimems=120000&heartbeatfrequencyms=20000&ssl=true
+        database: rcm-customer
+        username: 
+        password: 
+        retryWrite: true
+        authSource: admin
+  application:
+    name: "micro-customer"
+  messages:
+    basename: messages/customer/messages,messages/cloud-common/messages,messages/common/messages
+
+eureka:
+  instance:
+    intance-id: micro-customer-intance
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+platform:
+  config:
+    microservice:
+      customer: true
+    security:
+      server: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

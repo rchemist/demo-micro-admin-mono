@@ -1,0 +1,49 @@
+# Front 서비스는 다른 서비스와 달리 여러 서비스의 yml 을 import 하는 방식을 사용한다.
+# 그런데 spring 의 config. import 는 선언된 순서대로 현재 설정을 override 하는 방식이다.
+# 따라서 마지막에 import 된 yml 이 모든 설정을 덮어 쓰는 문제가 있다.
+# 이 문제를 해결하기 위해 다른 설정에서도 사용하고 있는 속성값은 override 에 따로 정의하고, override yml 파일을 맨 마지막에 import 하는 방식을 사용한다.
+
+spring:
+  application:
+    name: "micro-front"
+  messages:
+    basename: messages/**/messages #원래 spring 에서는 message sources 를 이렇게 작성하지 않지만, antMatcher를 사용할 수 있도록 커스터마이징 했으므로 /**/ 패턴을 사용할 수 있다.
+  servlet:
+    multipart:
+      enabled: true
+
+platform:
+  config:
+    microservice:
+      monolithic: true #모놀리틱모드일 때만 true
+      admin: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      asset: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      cms: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      commerce-catalog: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      commerce-order: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      commerce-promotion: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      customer: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      event: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+      tenant: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
+    security:
+      server: true #Front Site 에서 로그인 처리를 해야 하므로 이 값은 true 가 된다.
+    datasource:
+      data-per-services: false #각 서비스가 저마다 별도의 DB 를 가지고 있는 경우 이 값을 true로 한다. 일반적인 경우에는 false 로 셋팅하여 모든 서비스가 단일 DB를 사용하게 한다.
+      provider:
+        atomikos:
+          use: false #마이크로서비스 모드에서 각 서비스가 개별 DB를 가지고 있을 때 이기종 DB 간 트랜잭션을 처리할 때만 사용한다. 모놀리틱 모드에서는 false 로 셋팅한다.
+    provider:
+      search: querydsl #bootstrap.yml 의 값이 항상 오버라이드 되기 때문에 이 값은 별 의미가 없다.
+      cache: redis #redis 캐시를 반드시 사용한다.
+      elastic: true #spring data elastic search 를 사용할 때만 이 값을 활성화 한다.
+      kafka: false #마이크로서비스 모드에서 카프카 데이터 동기화를 사용할 경우 이 값을 true 로 한다.
+      mongo: false #mysql과 mongoDB를 함께 사용할 경우 이 값을 true로 한다. mysql 전용으로 사용할 때는 이 값을 false 로 한다.
+    asset:
+      view:
+        domain: http://localhost:8110 #마이크로서비스 모드에서 asset 서버가 다를 경우 해당 서버의 접속 주소를 기입한다. 모놀리틱 서비스인 경우에는 현재 서비스의 대표 주소를 쓰면 된다.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

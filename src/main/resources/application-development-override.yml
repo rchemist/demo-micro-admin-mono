@@ -1,0 +1,1 @@
+application-${spring.profiles.active:local}.yml

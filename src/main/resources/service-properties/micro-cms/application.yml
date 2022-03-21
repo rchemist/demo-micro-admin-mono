@@ -1,0 +1,64 @@
+spring:
+  datasource:
+    rcm-rdb:
+      cms:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_cms?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        password:
+        url: jdbc:mysql://DB_ADDRESS:DB_PORT/mc_cms?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
+        username:
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+            redisson:
+              entity-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              query-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+    rcm-mongo: # for override spring.data.mongodb.* values each at services
+      cms:
+        connectionString: mongodb+srv://MONGO_CLIENT_ID:MONGO_CLIENT_PASSWORD@MONGODB_ADDRESS/rcm-cms?retryWrites=true&w=majority&connecttimeoutms=10000&sockettimeoutms=15000&waitqueuetimeoutms=3000&maxlifetimems=60000&maxlifetimems=120000&heartbeatfrequencyms=20000&ssl=true
+        database: rcm-cms
+        username:
+        password: 
+        retryWrite: true
+        authSource: admin
+  application:
+    name: "micro-cms"
+  messages:
+    basename: messages/cms/messages,messages/cloud-common/messages,messages/common/messages
+
+platform:
+  config:
+    microservice:
+      cms: true
+    datasource:
+      provider:
+        atomikos:
+          use: true
+
+eureka:
+  instance:
+    intance-id: micro-cms-intance
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

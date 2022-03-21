@@ -1,0 +1,8 @@
+server:
+  port: 8280
+https:
+  port: 8281
+platform:
+  config:
+    tenant:
+      name: "micro-tenant(from git - development)"

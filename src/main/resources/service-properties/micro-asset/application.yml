@@ -1,0 +1,62 @@
+spring:
+  datasource:
+    rcm-rdb:
+      # platform.config.datasource.data-per-services 가 true 인 경우에만 사용 - 서비스마다 DB 가 다를 때
+      asset:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url:
+        password:
+        url:
+        username:
+        hibernate:
+          cache:
+            use_query_cache: true
+            use_second_level_cache: true
+            redisson:
+              entity-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+              query-asset:
+                eviction:
+                  max_entries: 100000
+                expiration:
+                  time_to_live: 86400000
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          hbm2ddl:
+            auto: update
+          show_sql: true
+    # platform.config.provider.mongo 가 true 인 경우에만 사용 - mongoDB 를 사용하는 경우
+    rcm-mongo: # for override spring.data.mongodb.* values each at services
+      asset:
+        connectionString: mongodb+srv://MONGO_CLIENT_ID:MONGO_CLIENT_PASSWORD@MONGODB_ADDRESS/rcm-asset?retryWrites=true&w=majority&connecttimeoutms=10000&sockettimeoutms=15000&waitqueuetimeoutms=3000&maxlifetimems=60000&maxlifetimems=120000&heartbeatfrequencyms=20000&ssl=true
+        database: rcm-asset
+        username:
+        password:
+        retryWrite: true
+        authSource: admin
+  application:
+    name: "micro-asset"
+  messages:
+    basename: messages/asset/messages,messages/cloud-common/messages,messages/common/messages
+
+platform:
+  config:
+    microservice:
+      asset: true
+
+eureka:
+  instance:
+    intance-id: micro-asset-intance
+  client:
+    service-url:
+      defaultZone: http://localhost:9999/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
