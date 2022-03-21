@@ -86,3 +86,17 @@ ajcore*.*
 .jpb/jpb-settings.xml
 /micro-admin/node_modules/
 /node_modules/
+/src/main/resources/service-properties/
+/src/main/resources/application.yml
+/src/main/resources/application-development.yml
+/src/main/resources/application-development-override.yml
+/src/main/resources/application-local.yml
+/src/main/resources/application-local-override.yml
+/src/main/resources/application-override.yml
+/src/main/resources/application-production.yml
+/src/main/resources/application-production-override.yml
+/src/main/resources/application-staging.yml
+/src/main/resources/application-staging-override.yml
+/src/main/resources/bootstrap.yml
+/src/main/resources/jta.properties
+/src/main/resources/redisson-dev.yml
