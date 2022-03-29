@@ -24,7 +24,17 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 
 <br>
 
-### 3. 이미 예약된 Controller Endpoint
+
+### 3. 관리자도구 설정
+- 로그인 화면 안내 메시지 변경
+  - platform.config.admin.view.login-title: 로그인 타이틀
+  - platform.config.admin.view.login-description: 부가 설명 메시지
+
+- 메뉴 로고 이미지 변경
+  - platform.config.admin.view.logo-image: 메뉴 상단 로고 이미지 URL
+  - platform.config.admin.view.logo-text: 메뉴 상단 로고 이미지 ALT TEXT
+
+### 4. 이미 예약된 Controller Endpoint
 
 다음 endpoint URL 은 플랫폼 내부에서 이미 사용중입니다. 추가 개발 시 아래 URL 은 사용할 수 없습니다.
 
