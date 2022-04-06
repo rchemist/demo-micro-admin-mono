@@ -26,13 +26,34 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 
 
 ### 3. 관리자도구 설정
-- 로그인 화면 안내 메시지 변경
-  - platform.config.admin.view.login-title: 로그인 타이틀
-  - platform.config.admin.view.login-description: 부가 설명 메시지
 
-- 메뉴 로고 이미지 변경
-  - platform.config.admin.view.logo-image: 메뉴 상단 로고 이미지 URL
-  - platform.config.admin.view.logo-text: 메뉴 상단 로고 이미지 ALT TEXT
+#### 로그인 화면 안내 메시지 변경
+
+| 항목        | property                               | 입력 예시                                   | 설명                 |
+|-----------|----------------------------------------|-----------------------------------------|--------------------|
+ | 로그인 타이틀   | platform.config.admin.view.login-title | Rchemist Admin Console                  | 로그인 폼에 표시하는 타이틀    |
+| 부가 설명 메시지 | platform.config.admin.view.login-title | Welcome to RCM MicroShop Admin Console! | 타이틀 하단에 표시되는 설명 문구 |
+
+#### 메뉴 로고 이미지 변경
+| 항목                    | property                              | 입력 예시                  |
+|-----------------------|---------------------------------------|------------------------|
+| 메뉴 상단 로고 이미지 URL      | platform.config.admin.view.logo-image | /images/logo.png       |
+| 메뉴 상단 로고 이미지 ALT TEXT | platform.config.admin.view.logo-text  | Rchemist Admin Console |
+
+
+#### 대시보드 게시판 보기 설정
+| 항목                     | property                                         | 입력 예시                     | 설명                                                                       |
+|------------------------|--------------------------------------------------|---------------------------|--------------------------------------------------------------------------|
+| 조회 대상 게시판 Alias        | platform.config.admin.dashboard.board.alias      | notice, qna, free, report | 등록된 게시판의 alias 를 입력하면 대시보드에 해당 게시판의 최신 게시물이 표시됩니다                        |
+| 표시할 게시물 개수             | platform.config.admin.dashboard.board.row-size   | 3                         | 대시보드에서 각 게시판의 게시물을 설정된 개수만큼 표시합니다                                        |
+| 한 줄에 게시판을 두개씩 표시할 지 여부 | platform.config.admin.dashboard.board.split-view | true                      | 대시보드 화면에 게시판을 표시할 때 한 줄에 하나씩 표시할지(false), 한 줄에 두개씩 분할해 표시할지(true) 선택합니다. |
+| 대시보드 캐시 타임(분)          | platform.config.admin.dashboard.board.refresh    | 5                         | 설정된 캐시 주기마다 게시판 데이터를 조회합니다                                               | 
+
+#### 기타
+| 항목                  | property                                 | 입력 예시                       | 설명                                                                                                                                         |
+|---------------------|------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 메타데이터 캐시 여부         | platform.config.admin.metadata.cacheable | true                        | 관리자도구를 표시할 때 사용하는 각종 메타데이터를 캐시할 지 여부. 운영 시스템에는 반드시 true 로 설정해야 합니. (기본값 true)                                                              |
+| 사용 가능한 메뉴를 명시적으로 설정 | platform.config.admin.menu.explicit      | DASHBOARD, CUSTOMER, TENANT | 관리자도구에 기본 제공되는 메뉴 대신, 명시적으로 사용할 메뉴를 설정하면 해당 메뉴만 표시됩니다. 입력할 수 있는 문자열은 io.rchemist.admin.router.SectionType 클래스에 정의된 SectionType.type 값 입니다. |
 
 ### 4. 이미 예약된 Controller Endpoint
 
