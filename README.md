@@ -51,6 +51,12 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 | 비밀번호 찾기 링크 텍스트 | buttonLinkRequestText         | 로그인이 안 되시나요?                            | 로그인 입력폼에서 비밀번호 입력폼으로 전환할 때 링크 텍스트                                                                       |
 | 테마             | theme                         | red                                     | 로그인 화면 테마 선택. BLUE, LIGHT_BLUE, GREEN, LIGHT_GREEN, VIOLET, YELLOW, YELLOW_WHITE, HOT_PINK, RED , BLACK |
 
+- 로그인 테마
+
+![로그인_테마](./asset/login_theme.png)
+
+
+
 #### 메뉴 로고 이미지 변경
 | 항목                    | property                              | 입력 예시                  |
 |-----------------------|---------------------------------------|------------------------|
