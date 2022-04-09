@@ -27,12 +27,29 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 
 ### 3. 관리자도구 설정
 
-#### 로그인 화면 안내 메시지 변경
+#### 로그인 화면 설정
 
-| 항목        | property                               | 입력 예시                                   | 설명                 |
-|-----------|----------------------------------------|-----------------------------------------|--------------------|
- | 로그인 타이틀   | platform.config.admin.view.login-title | Rchemist Admin Console                  | 로그인 폼에 표시하는 타이틀    |
-| 부가 설명 메시지 | platform.config.admin.view.login-title | Welcome to RCM MicroShop Admin Console! | 타이틀 하단에 표시되는 설명 문구 |
+- 로그인 화면 설정 property 는 platform.config.admin.view.login.* 의 하위 요소 입니다.
+
+| 항목             | property                      | 입력 예시                                   | 설명                                                                                                      |
+|----------------|-------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------|
+ | 로그인 타이틀        | title                         | Rchemist Admin Console                  | 로그인 폼에 표시하는 타이틀                                                                                         |
+| 부가 설명 메시지      | description                   | Welcome to RCM MicroShop Admin Console! | 타이틀 하단에 표시되는 설명 문구                                                                                      |
+| 로그인 로고 이미지     | logoImage                     | ./image/login_logo.png                  | 로그인 폼 상단에 표시할 로고 이미지. 입력하지 않으면 아무 것도 표시되지 않으며, 세로 40px 이내의 크기로 저장해야 함                                   |
+| 로그인 폼 타이틀      | loginFormTitle                | 로그인                                     | 로그인 입력폼 상단에 표시될 문구                                                                                      |
+| 비밀번호 찾기 폼 타이틀  | requestFormTitle              | 비밀번호 찾기                                 | 비밀번호 찾기 입력폼 상단에 표시될 문구                                                                                  |
+| 아이디 라벨         | labelUsername                 | 아이디                                     | 타이틀 하단에 표시되는 설명 문구                                                                                      |
+| 비밀번호 라벨        | labelPassword                 | 비밀번호                                    | 타이틀 하단에 표시되는 설명 문구                                                                                      |
+| 비밀번호 찾기 입력폼 라벨 | labelRequest                  | 아이디 또는 이메일                              | 타이틀 하단에 표시되는 설명 문구                                                                                      |
+| 로그인 에러 타이틀     | errorLoginSubmitTitle         | 로그인할 수 없습니다.                            | 로그인 실패 시 ! 와 함께 표시될 에러 타이틀                                                                              |
+| 로그인 에러 메시지     | errorLoginSubmitDescription   | 아이디 또는 비밀번호를 다시 확인해 주세요.                | 로그인 실패 상세 설명                                                                                            |
+| 비밀번호 찾기 에러 타이틀 | errorRequestSubmitTitle       | 사용자 정보를 확인할 수 없습니다.                     | 비밀번호 찾기 실패 시 ! 와 함께 표시될 에러 타이틀                                                                          |
+| 비밀번호 찾기 에러 메시지 | errorRequestSubmitDescription | 아이디 또는 이메일을 다시 확인해 주세요.                 | 비밀번호 찾기 실패 시 상세 설명                                                                                      |
+| 로그인 SUBMIT     | buttonLoginText               | 로그인                                     | 로그인 입력폼 SUBMIT 버튼 텍스트                                                                                   |
+| 로그인 링크 텍스트     | buttonLinkLoginText           | 로그인 화면으로                                | 비밀번호 찾기 입력폼에서 로그인 입력폼으로 전환할 때 링크 텍스트                                                                    |
+| 비밀번호 찾기 SUBMIT | buttonRequestText             | 비밀번호 찾기                                 | 비밀번호 찾기 입력폼 SUBMIT 버튼 텍스트                                                                               |
+| 비밀번호 찾기 링크 텍스트 | buttonLinkRequestText         | 로그인이 안 되시나요?                            | 로그인 입력폼에서 비밀번호 입력폼으로 전환할 때 링크 텍스트                                                                       |
+| 테마             | theme                         | red                                     | 로그인 화면 테마 선택. BLUE, LIGHT_BLUE, GREEN, LIGHT_GREEN, VIOLET, YELLOW, YELLOW_WHITE, HOT_PINK, RED , BLACK |
 
 #### 메뉴 로고 이미지 변경
 | 항목                    | property                              | 입력 예시                  |

@@ -14,6 +14,13 @@ spring:
 
 platform:
   config:
+    admin:
+      view:
+        login:
+          theme: violet
+      dashboard:
+        board:
+          alias: board_notice,board_suggest,board_prctc,board_order
     microservice:
       monolithic: true #모놀리틱모드일 때만 true
       admin: false #모놀리틱모드일 때 pom 에서 모든 서비스를 참조하므로 이 값이 자동으로 true 가 된다. 따라서 모놀리틱 모드일 때 이 값을 반드시 false 로 override 해야 한다.
