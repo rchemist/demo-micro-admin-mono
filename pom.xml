@@ -39,8 +39,8 @@
     <hibernate.version>5.6.0.Final</hibernate.version>
     <!--<hibernate.search.version>6.0.7.Final</hibernate.search.version>-->
     <!--<hibernate.elasticsearch.version>6.0.7.Final</hibernate.elasticsearch.version>-->
-    <hibernate.search.version>6.1.0.Beta1</hibernate.search.version>
-    <hibernate.elasticsearch.version>6.1.0.Beta1</hibernate.elasticsearch.version>
+    <hibernate.search.version>6.1.1.Final</hibernate.search.version>
+    <hibernate.elasticsearch.version>6.1.1.Final</hibernate.elasticsearch.version>
     <spring.boot.version>2.6.1</spring.boot.version>
     <spring.data.elasticsearch.version>4.3.0</spring.data.elasticsearch.version>
     <spring.cloud.security.version>2.2.5.RELEASE</spring.cloud.security.version>
