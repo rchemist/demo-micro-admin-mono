@@ -73,23 +73,19 @@
 
   <repositories>
     <repository>
+      <id>rchemist.snapshots</id>
+      <url>https://github.com/rchemist/release-micro/raw/main/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
       <id>central</id>
       <url>https://repo1.maven.org/maven2/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-    </repository>
-    <repository>
-      <id>spring</id>
-      <url>https://repo.spring.io/plugins-release/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>spring-milestone</id>
-      <name>Spring Maven MILESTONE Repository</name>
-      <url>https://repo.spring.io/libs-milestone</url>
     </repository>
     <repository>
       <id>JabyIon</id>
@@ -123,14 +119,7 @@
       <id>invesdwin</id>
       <url>https://invesdwin.de/repo/invesdwin-oss-remote/</url>
     </repository>
-    <repository>
-      <id>rchemist.snapshots</id>
-      <url>https://github.com/rchemist/release-micro/raw/main/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
+
   </repositories>
 
 
@@ -141,14 +130,6 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>spring-snapshots</id>
-      <url>https://repo.spring.io/snapshot</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>spring-milestones</id>
-      <url>https://repo.spring.io/milestone</url>
     </pluginRepository>
   </pluginRepositories>
 
