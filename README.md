@@ -149,6 +149,24 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 *explicit 으로 설정한 메뉴를 exclude 에 설정하면 해당 메뉴가 보이지 않게 됩니다.*
 
 
+#### 회원 관리 기능 설정
+
+관리자도구 > 회원관리 기능을 설정할 수 있습니다. 
+
+- platform.config.customer.create.admin.*
+
+| 항목                | property | 입력 예시                       | 설명                                                                                                                                            |
+|-------------------|----------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| 회원 생성<br/>사용 여부   | enabled  | false                       | 관리자도구에서 회원 생성 기능을 사용할 것인지(true), 사용하지 않을 것인지(false)<br/>기본값은 false                                                                            |
+ | 회원 생성 시<br/>사용 필드 | fields   | loginName<br/>,emailAddress | 관리자도구에서 회원을 생성할 때 사용할 필드를 명시적으로 지정<br/>기본값은 없으며, 이 값이 없을 때는 CustomerCreateForm 의 기본값을 사용함.<br/>단, loginName 과 emailAddress 는 지정하지 않아도 무조건 추가됨 |
+
+- platform.config.admin.view.customer.list.*
+
+| 항목            | property        | 입력 예시 | 설명                                               |
+|---------------|-----------------|-------|--------------------------------------------------|
+| Hidden 기능 활성화 | hidden-customer | true  | 관리자도구 회원 관리에서 회원 hidden 기능을 사용할지 여부. (기본값 false) |
+
+
 #### 기타
 
 - platform.config.admin.*
@@ -156,7 +174,6 @@ _이때 반드시 기존 pom.xml 파일과 MonolithicAdminApplication.java 파�
 | 항목                     | property                           | 입력 예시    | 설명                                                                      |
 |------------------------|------------------------------------|----------|-------------------------------------------------------------------------|
 | 메타데이터 캐시 여부            | metadata.cacheable                 | true     | 관리자도구 메타데이터를 캐시할 지 여부. 운영 시스템에는 반드시 true 로 설정해야 합니다. (기본값 true)         |
-| Customer Hidden 기능 활성화 | view.customer.list.hidden-customer | true     | 관리자도구 회원 관리에서 회원 hidden 기능을 사용할지 여부. (기본값 false)                        |
 | 사이트 이름                 | site-name                          | RCHEMIST | 관리자도구 어플리케이션에서 사용하는 사이트 이름. (기본값 없음). 메시지를 발송하거나 UI 에서 사이트 이름을 표시할 때 사용 |
 
 
@@ -180,9 +197,9 @@ IDE 에서 프로젝트를 열고 아래 각 Controller 를 탐색하면 실제 
     - io.rchemist.cms.page.controller.PageController
     - io.rchemist.cms.page.controller.PageFieldController
 - /commerce/**
-    - 커뮤니티 프로젝트에서는 지원하지 않으나, 해당 endpoint url 은 사용 금지.
+    - 커뮤니티 프로젝트에서는 지원하지 않으나, 해당 endpoint url 은 사용 불가.
 - /event/**
-    - 모놀리틱 서비스 모드에서는 지원하지 않으나, 해당 endpoint url 은 사용 금지.
+    - 모놀리틱 서비스 모드에서는 지원하지 않으나, 해당 endpoint url 은 사용 불가.
 - /tenant/**
     - io.rchemist.tenant.controller.TenantController
     - io.rchemist.tenant.security.AdminUserAuthenticationController
@@ -571,7 +588,7 @@ spring.profiles.active=production
 
 기본적으로는 java -jar demo-micro-admin-mono-0.0.1-SNAPSHOT.jar 만 실행하면 됩니다. 하지만 이렇게 할 경우 spring boot jar 파일이 로드될 때 모든 class path 를 계속 탐색하게 되어 SpringBoot 의 기동 속도가 매우 느려집니다.
 
-이 문제를 방지하기 위해 다음 구문을 이용하면 됩니다.
+이 문제를 방지하기 위해 다음 구문을 이용합니다.
 
 ```shell
 java -jar -Xverify:none -XX:TieredStopAtLevel=1 demo-micro-admin-mono-0.0.1-SNAPSHOT.jar
